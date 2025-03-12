@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: black;
+            font-size: 24px;
+        }
+        label {
+            font-weight: bold;
+            color: black;
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: black;
+        }
+        input::placeholder {
+            color: rgba(0, 0, 0, 0.8);
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .button, .mic-button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        .button:hover, .mic-button:hover {
+            background: darkblue;
+        }
+        .mic-button {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function saveAndRedirect() {
+            let username = document.getElementById("Full Name").value;
+            let createPassword = document.getElementById("create-password").value;
+            let password = document.getElementById("password").value;
+
+            localStorage.setItem("savedFullName", username);
+            localStorage.setItem("savedPassword", password);
+
+            window.location.href = "login.html";
+        }
+
+        function goBack() {
+            window.location.href = "login.html";
+        }
+
+        function startVoiceRecognition(inputId) {
+            let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                document.getElementById(inputId).value = event.results[0][0].transcript;
+            };
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form onsubmit="saveAndRedirect(); return false;">
+            <label for="Full Name">Full Name</label>
+            <input type="text" id="Full Name" name="Full Name" placeholder="Enter your Full Name" required>
+            <button type="button" class="mic-button" onclick="startVoiceRecognition('Full Name')">🎤</button>
+            
+            <label for="create-password">Create Password</label>
+            <input type="password" id="create-password" name="create-password" placeholder="Enter your password" required>
+            <button type="button" class="mic-button" onclick="startVoiceRecognition('create-password')">🎤</button>
+            
+            <label for="password">Confirm Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <button type="button" class="mic-button" onclick="startVoiceRecognition('password')">🎤</button>
+
+            <div class="button-group">
+                <button type="button" class="button" onclick="goBack()">Back</button>
+                <button type="submit" class="button">Next</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

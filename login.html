@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .container h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            color: #444;
+        }
+        input {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+        }
+        .voice-button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+        .button {
+            width: 100%;
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .button.secondary {
+            background: #28a745;
+        }
+        .button.secondary:hover {
+            background: #218838;
+        }
+    </style>
+    <script>
+        function goToNext() {
+            alert('Proceeding to the next step...');
+            window.location.href = 'Generateform.html'; // Link to Generate Form Page
+        }
+
+        function startVoiceRecognition(inputId) {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+            recognition.onresult = function(event) {
+                document.getElementById(inputId).value = event.results[0][0].transcript;
+            };
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Login</h2>
+    <label for="username">Full Name:</label>
+    <input type="text" id="FullName" name="Full Name" required>
+    <button type="button" class="voice-button" onclick="startVoiceRecognition('FullName')">🎤</button>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="button" class="voice-button" onclick="startVoiceRecognition('password')">🎤</button>
+
+    <button type="button" class="button secondary" onclick="goToNext()">Next</button>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Builder with Voice Recognition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+            gap: 30px;
+        }
+        .form-builder, .form-preview {
+            width: 48%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        button {
+            padding: 10px 20px;
+            background: #ff7eb3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #ff5573;
+            transform: scale(1.05);
+        }
+        input, textarea {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            outline: none;
+            transition: background 0.3s ease-in-out;
+        }
+        input:focus, textarea:focus {
+            background: rgba(255, 255, 255, 1);
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+        form button[type="submit"] {
+            width: 100%;
+            margin-top: 20px;
+            background: #4CAF50;
+            border-radius: 25px;
+        }
+        .services {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .service-btn {
+            padding: 10px 20px;
+            background: #ffcc29;
+            color: black;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+        .service-btn:hover {
+            background: #ff9900;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<h1>Form Builder with Voice Recognition</h1>
+<div class="services">
+    <button class="service-btn" onclick="alert('Service 1 Activated')">Service 1</button>
+    <a href="#">Services ▼</a>
+    <ul class="dropdown-menu">
+        <li><a href="Docter appointment.html">Doctor Appointment</a></li>
+        <li><a href="job application.html">Job Application</a></li>
+        <li><a href="customer intake.html">Customer Intake Form</a></li>
+        <li><a href="visa appointment.html">visa appointment</a></li>
+        <li><a href="incurance.html">Insurance</a></li>
+       
+    </ul>
+</div>
+<div class="form-container">
+    <div class="form-builder">
+        <h2>Form Title</h2>
+        <input type="text" id="formTitle" placeholder="Enter Title">
+        <button onclick="startRecognition('formTitle')">🎙️</button>
+        
+        <h3>Description</h3>
+        <textarea id="formDescription" placeholder="Enter Description"></textarea>
+        <button onclick="startRecognition('formDescription')">🎙️</button>
+        
+        <h3>Field Label</h3>
+        <input type="text" id="fieldLabel" placeholder="Field Label">
+        <button onclick="startRecognition('fieldLabel')">🎙️</button>
+        <br>
+        <button onclick="addField()">+ Add Field</button>
+    </div>
+    
+    <div class="form-preview">
+        <h2>Form Preview</h2>
+        <form id="previewForm">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function startRecognition(elementId) {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const result = event.results[0][0].transcript;
+            document.getElementById(elementId).value = result;
+        }
+
+        recognition.onerror = function(event) {
+            alert('Speech recognition error: ' + event.error);
+        }
+    }
+
+    function addField() {
+        const label = document.getElementById("fieldLabel").value;
+        if (label.trim() !== "") {
+            const field = `<label>${label}</label><input type='text' placeholder='Enter ${label}'><br>`;
+            document.getElementById("previewForm").insertAdjacentHTML("beforeend", field);
+            document.getElementById("fieldLabel").value = "";
+        } else {
+            alert("Please enter a field label");
+        }
+    }
+</script>
+</body>
+</html>

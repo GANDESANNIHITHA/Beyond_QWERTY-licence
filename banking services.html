@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Sector Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        input {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid black;
+            border-radius: 4px;
+            width: 100%;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        .voice-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function startRecognition(inputId) {
+            let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+            recognition.onresult = function(event) {
+                document.getElementById(inputId).value = event.results[0][0].transcript;
+            };
+        }
+        
+        function validateForm(event) {
+            event.preventDefault();
+            
+            let fullName = document.getElementById("fullName").value;
+            let accountNumber = document.getElementById("accountNumber").value;
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            let address = document.getElementById("address").value;
+            let aadhaar = document.getElementById("aadhaar").value;
+            let withdrawAmount = document.getElementById("withdrawAmount").value;
+            
+            if (!fullName || !accountNumber || !phoneNumber || !address || !aadhaar || !withdrawAmount) {
+                alert("All fields are required.");
+                return;
+            }
+            
+            let formData = `Full Name: ${fullName}\nAccount Number: ${accountNumber}\nPhone Number: ${phoneNumber}\nAddress: ${address}\nAadhaar Card: ${aadhaar}\nWithdraw Amount: ${withdrawAmount}`;
+            alert("Submitted Data:\n" + formData);
+        }
+    </script>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Banking Sector Information</h2>
+    <form onsubmit="validateForm(event)">
+        <label for="fullName">Full Name:</label>
+        <div class="input-group">
+            <input type="text" id="fullName" required>
+            <button type="button" class="voice-button" onclick="startRecognition('fullName')">🎙️</button>
+        </div>
+        
+        <label for="accountNumber">Account Number:</label>
+        <div class="input-group">
+            <input type="number" id="accountnumber" required>
+            <button type="button" class="voice-button" onclick="startRecognition('accountnumber')">🎙️</button>
+        </div>
+
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <div class="input-group">
+            <input type="number" id="phoneNumber" required>
+            <button type="button" class="voice-button" onclick="startRecognition('phoneNumber')">🎙️</button>
+        </div>
+        
+        <label for="address">Address:</label>
+        <div class="input-group">
+            <input type="text" id="address" required>
+            <button type="button" class="voice-button" onclick="startRecognition('address')">🎙️</button>
+        </div>
+        
+        <label for="aadhaar">Aadhaar Card:</label>
+        <div class="input-group">
+            <input type="number" id="aadhaar" required>
+            <button type="button" class="voice-button" onclick="startRecognition('aadhaar')">🎙️</button>
+        </div>
+
+        
+        <label for="withdrawAmount">Withdraw Amount:</label>
+        <div class="input-group">
+            <input type="number" id="withdrawamount" required>
+            <button type="button" class="voice-button" onclick="startRecognition('withdrawamount')">🎙️</button>
+        </div>
+
+        
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

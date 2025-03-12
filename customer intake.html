@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Intake Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid black;
+            border-radius: 4px;
+            width: 100%;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+        .voice-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function startRecognition(inputId) {
+            let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+            recognition.onresult = function(event) {
+                document.getElementById(inputId).value = event.results[0][0].transcript;
+            };
+        }
+    </script>
+</head>
+<body>
+<div class="form-container">
+    <h2>Customer Intake Form</h2>
+    <form>
+        <label for="fullName">Full Name:</label>
+        <div class="input-group">
+            <input type="text" id="fullName" required>
+            <button type="button" class="voice-button" onclick="startRecognition('fullName')">🎙️</button>
+        </div>
+        
+        <label for="email">Email:</label>
+        <div class="input-group">
+            <input type="email" id="email" required>
+            <button type="button" class="voice-button" onclick="startRecognition('email')">🎙️</button>
+        </div>
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <div class="input-group">
+            <input type="tel" id="phoneNumber" required>
+            <button type="button" class="voice-button" onclick="startRecognition('phoneNumber')">🎙️</button>
+        </div>
+        
+        <label for="address">Address:</label>
+        <div class="input-group">
+            <input type="text" id="address" required>
+            <button type="button" class="voice-button" onclick="startRecognition('address')">🎙️</button>
+        </div>
+        
+        <label for="serviceType">Service Type Requested:</label>
+        <div class="input-group">
+            <input type="text" id="serviceType" required>
+            <button type="button" class="voice-button" onclick="startRecognition('serviceType')">🎙️</button>
+        </div>
+        
+        <label for="comments">Additional Comments:</label>
+        <div class="input-group">
+            <input type="text" id="comments">
+            <button type="button" class="voice-button" onclick="startRecognition('comments')">🎙️</button>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

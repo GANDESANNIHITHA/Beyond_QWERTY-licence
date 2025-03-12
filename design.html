@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaani fills</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: blue;
+            padding: 15px 20px;
+            color: white;
+            position: relative;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px;
+            display: block;
+        }
+
+        /* Dropdown Styling */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: lightgray;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, blue, blue);
+            color: white;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            background-color: white;
+            color: blue;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: lightgray;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background: blue;
+            color: white;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        /* Login Button Styling */
+        .login-button {
+            background-color: blue;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: blue;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <li class="dropdown">
+       
+    </li>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo"> Multi-Sector Services</div>
+        <ul class="nav-links">
+            <li><a href="about.html" title="Learn more about our services and mission">About</a></li>
+
+
+            <li class="dropdown">
+                <a href="#">Services ▼</a>
+                <ul class="dropdown-menu">
+                    <li><a href="Docter appointment.html">Doctor Appointment</a></li>
+                    <li><a href="job application.html">Job Application</a></li>
+                    <li><a href="customer intake.html">Customer Intake Form</a></li>
+                    <li><a href="banking services.html">Banking Services</a></li>
+                    <li><a href="visa appointment.html">visa appointment</a></li>
+                    <li><a href="incurance.html">Insurance</a></li>
+                   
+                </ul>
+            </li>
+            <li><a href="login.html" class="login-button">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Speak your mind, we'll fill in the rest – turning your voice into effortless forms.</h1>
+        <p>Empower your forms with voice recognition technology, transforming speech into seamless data entry. Simplify form filling by speaking naturally, enhancing speed, accessibility, and accuracy — making every interaction smarter and more intuitive..</p>
+        <a href="signin.html" class="cta-button">Start Now</a>
+    </header>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Vaani fills. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
